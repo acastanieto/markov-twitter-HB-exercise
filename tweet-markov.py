@@ -13,6 +13,7 @@ from sys import argv
 from markovgenerator import TweetableMarkovGenerator
 
 tweet = TweetableMarkovGenerator()
+
 # print "TweetableMarkovGenerator"
 # print tweet.make_text(tweet.make_chains(argv)), len(tweet.make_text(tweet.make_chains(argv)),)
 

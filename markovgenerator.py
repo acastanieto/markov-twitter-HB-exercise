@@ -1,11 +1,14 @@
 from sys import argv
 import random
 import string
+
 class SimpleMarkovGenerator(object):
     """Takes in text input, and generates a Markov string based on that 
     input using a Markov Chain algorithm."""
 
     def read_text_files(self, argv):
+        """Takes text of files entered in command line, and combines them into one string"""
+
         string_list = []
 
         for file_name in argv[1:]:
@@ -71,26 +74,55 @@ class SimpleMarkovGenerator(object):
 class TweetableMarkovGenerator(SimpleMarkovGenerator):
     """Takes in text input, and generates a tweetable (140 characters or less) 
     Markov string based on that input using a Markov Chain algorithm."""
-
+    
     def make_text(self, chains):
         """Takes dictionary of markov chains; returns random text that is
         140 characters long or less."""
             
         rand_key, markov_list = self.choose_first_bigram(chains)
         key1, key2 = rand_key          
-
+        
         while rand_key in chains:
 
             rand_new_word = random.choice(chains[rand_key])
+            if markov_list[-1][-1] in '.?!':
+                if not rand_new_word[0].isupper():
+                    continue
+
             if len(" ".join(markov_list) + rand_new_word) + 1 < 139:
                 markov_list.append(rand_new_word)
+                            
             elif markov_list[-1][-1] in '.?"!':
-                # print rand_new_word[-1]
-                # markov_list.append(rand_new_word)
                 return " ".join(markov_list)
+            
             else:
                 markov_list.pop()
+            
             rand_key = (rand_key[1], rand_new_word)
+
+
+    # def make_text(self, chains):
+    #     """Takes dictionary of markov chains; returns random text that is
+    #     140 characters long or less."""
+            
+    #     rand_key, markov_list = self.choose_first_bigram(chains)
+    #     key1, key2 = rand_key          
+
+    #     while rand_key in chains:
+
+    #         rand_new_word = random.choice(chains[rand_key])
+            
+    #         if len(" ".join(markov_list) + rand_new_word) + 1 < 139:
+    #             markov_list.append(rand_new_word)
+
+            
+    #         elif markov_list[-1][-1] in '.?"!':
+    #             return " ".join(markov_list)
+            
+    #         else:
+    #             markov_list.pop()
+            
+    #         rand_key = (rand_key[1], rand_new_word)
 
 
 
@@ -100,14 +132,14 @@ class TweetableMarkovGenerator(SimpleMarkovGenerator):
       
 #     print "*" * 50
     
-#     # print "SimpleMarkovGenerator"
-#     # simple = SimpleMarkovGenerator()
-#     # print simple.make_text(simple.make_chains(argv))
-#     # # print simple.make_chains(argv)
+# #     # print "SimpleMarkovGenerator"
+# #     # simple = SimpleMarkovGenerator()
+# #     # print simple.make_text(simple.make_chains(argv))
+# #     # # print simple.make_chains(argv)
 
     
-#     # print "\n"
-#     # tweet = TweetableMarkovGenerator()
-#     # print "TweetableMarkovGenerator"
-#     # print tweet.make_text(tweet.make_chains(argv))
+#     print "\n"
+#     tweet = TweetableMarkovGenerator()
+#     print "TweetableMarkovGenerator"
+#     print tweet.make_text(tweet.make_chains(argv))
 
