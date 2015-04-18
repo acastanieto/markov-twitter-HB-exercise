@@ -4,18 +4,12 @@ import twitter
 
 from sys import argv
 
+from markovgenerator import TweetableMarkovGenerator
 
 # Use Python os.environ to get at environmental variables
 #ls
 # Note: you must run `source secrets.sh` before running this file
 # to make sure these environmental variables are set.
-
-from markovgenerator import TweetableMarkovGenerator
-
-tweet = TweetableMarkovGenerator()
-
-# print "TweetableMarkovGenerator"
-# print tweet.make_text(tweet.make_chains(argv)), len(tweet.make_text(tweet.make_chains(argv)),)
 
 api = twitter.Api(
     consumer_key=os.environ['TWITTER_CONSUMER_KEY'],
@@ -27,5 +21,10 @@ api = twitter.Api(
 print api.VerifyCredentials()
 
 # Send a tweet
+tweet = TweetableMarkovGenerator()
 status = api.PostUpdate(tweet.make_text(tweet.make_chains(argv)))
 print status.text
+
+
+# print "TweetableMarkovGenerator"
+# print tweet.make_text(tweet.make_chains(argv)), len(tweet.make_text(tweet.make_chains(argv)),)

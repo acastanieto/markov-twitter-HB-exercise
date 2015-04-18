@@ -101,31 +101,7 @@ class TweetableMarkovGenerator(SimpleMarkovGenerator):
             rand_key = (rand_key[1], rand_new_word)
 
 
-    # def make_text(self, chains):
-    #     """Takes dictionary of markov chains; returns random text that is
-    #     140 characters long or less."""
-            
-    #     rand_key, markov_list = self.choose_first_bigram(chains)
-    #     key1, key2 = rand_key          
-
-    #     while rand_key in chains:
-
-    #         rand_new_word = random.choice(chains[rand_key])
-            
-    #         if len(" ".join(markov_list) + rand_new_word) + 1 < 139:
-    #             markov_list.append(rand_new_word)
-
-            
-    #         elif markov_list[-1][-1] in '.?"!':
-    #             return " ".join(markov_list)
-            
-    #         else:
-    #             markov_list.pop()
-            
-    #         rand_key = (rand_key[1], rand_new_word)
-
-
-
+  
 ###############################################################
     
 # if __name__ == "__main__":
